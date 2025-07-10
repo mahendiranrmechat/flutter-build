@@ -31,9 +31,18 @@ jobs:
       - name: Build Windows executable
         run: flutter build windows
 
-      - name: Upload build artifact
+      - name: List build output for debugging
+        run: |
+          echo "Listing Release directory..."
+          dir build\windows\runner\Release
+
+      - name: Upload Windows executable artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: build/windows/runner/Release/
+          path: |
+            build/windows/runner/Release/*.exe
+            build/windows/runner/Release/data/
+            build/windows/runner/Release/*.dll
           retention-days: 5
