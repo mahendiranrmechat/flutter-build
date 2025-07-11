@@ -29,9 +29,14 @@ jobs:
       - name: List output for debug
         run: Get-ChildItem -Path build/windows/x64/runner/Release/ -Recurse
 
-      - name: Upload Windows artifact
+      - name: Upload Full Windows Build
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: build/windows/x64/runner/Release/demo.exe
+          path: |
+            build/windows/x64/runner/Release/demo.exe
+            build/windows/x64/runner/Release/flutter_windows.dll
+            build/windows/x64/runner/Release/icudtl.dat
+            build/windows/x64/runner/Release/data/**
+            build/windows/x64/runner/Release/*.dll
           retention-days: 5
